@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     int currentRun;
     int inning = 1;
     int totalRunsOp = 0;
+    public Image hrBoard;
+    public GameObject KBoard;
 
     public GameObject catchAudio;
     public GameObject strikeAudio;
@@ -154,45 +156,29 @@ public class GameManager : MonoBehaviour
     IEnumerator strikeIns()
     {
         Instantiate(catchAudio, Vector2.zero, Quaternion.identity);
-        strikeObj.SetActive(true);
         strike++;
-        if (strike == 1)
+        if (strike < 3)
         {
+            strikeObj.SetActive(true);
             Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);
-            strike1.color = new Color32(253, 236, 4, 255);
+            checkLight();
             yield return new WaitForSeconds(2);
-        }
-        if (strike == 2)
+            strikeObj.SetActive(false);
+        } else
         {
-            Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);
-            strike2.color = new Color32(253, 236, 4, 255);
-            yield return new WaitForSeconds(2);
-        }
-        if (strike == 3)
-        {
+            //(strike == 3)
             Instantiate(strikeOutAudio, Vector2.zero, Quaternion.identity);
-            strike3.color = new Color32(253, 236, 4, 255);
+            KBoard.SetActive(true);
+            checkLight();
             yield return new WaitForSeconds(2);
-            strike1.color = new Color32(255, 255, 255, 255);
-            strike2.color = new Color32(255, 255, 255, 255);
-            strike3.color = new Color32(255, 255, 255, 255);
+            KBoard.SetActive(false);            
             strike = 0;
             outs++;
+            checkLight();            
         }
 
-        strikeObj.SetActive(false);
-
-        if (outs == 1)
-        {
-            out1.color = new Color32(244, 10, 1, 255);
-        }
-        if (outs == 2)
-        {
-            out2.color = new Color32(244, 10, 1, 255);
-        }
         if (outs == 3)
         {
-            out3.color = new Color32(244, 10, 1, 255);
             runsOp.text = currentRun.ToString();
             currentRun = 0;
             runsOp.enabled = true;
@@ -200,10 +186,8 @@ public class GameManager : MonoBehaviour
             runsOp.transform.SetParent(GameObject.FindGameObjectWithTag("runs").transform, false);
             runsOp.enabled = false;
             yield return new WaitForSeconds(1);
-            out1.color = new Color32(255, 255, 255, 255);
-            out2.color = new Color32(255, 255, 255, 255);
-            out3.color = new Color32(255, 255, 255, 255);
             outs = 0;
+            checkLight();
         }  
         createIns();
     }
@@ -211,8 +195,13 @@ public class GameManager : MonoBehaviour
     IEnumerator homerunPage()
     {
         Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
+        strike = 0;
+        checkLight();
         homerun.SetActive(true);
         yield return new WaitForSeconds(1);
+        hrBoard.enabled = true;
+        yield return new WaitForSeconds(1.5f);
+        hrBoard.enabled = false;
         runPage.SetActive(true);
         Instantiate(lostAudio, Vector2.zero, Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
@@ -244,6 +233,45 @@ public class GameManager : MonoBehaviour
         canPitch = true;
     }
 
+    private void checkLight()
+    {
+        if (strike >= 1)
+        {
+            strike1.color = new Color32(253, 236, 4, 255);
+            if (strike >= 2)
+            {
+                strike2.color = new Color32(253, 236, 4, 255);
+                if (strike == 3)
+                {
+                    strike3.color = new Color32(253, 236, 4, 255);
+                }
+            }
+        } else 
+        {
+            strike1.color = new Color32(0, 0, 0, 255);
+            strike2.color = new Color32(0, 0, 0, 255);
+            strike3.color = new Color32(0, 0, 0, 255);
+        }
+
+        if (outs >= 1)
+        {
+            out1.color = new Color32(244, 10, 1, 255);
+            if (outs >= 2)
+            {
+                out2.color = new Color32(244, 10, 1, 255);
+                if (outs == 3)
+                {
+                    out3.color = new Color32(244, 10, 1, 255);
+                }
+            }
+        }
+        else
+        {
+            out1.color = new Color32(0, 0, 0, 255);
+            out2.color = new Color32(0, 0, 0, 255);
+            out3.color = new Color32(0, 0, 0, 255);
+        }
+    }
 
     
 }
