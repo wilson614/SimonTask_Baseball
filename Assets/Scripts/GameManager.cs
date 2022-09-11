@@ -18,9 +18,17 @@ public class GameManager : MonoBehaviour
     public Image finger3;
     public GameObject bubble;
     public Image point;
-    public GameObject strike;
+    public GameObject strikeObj;
     public GameObject homerun;
     public GameObject run;
+    int strike = 0;
+    int outs = 0;
+    public Image strike1;
+    public Image strike2;
+    public Image strike3;
+    public Image out1;
+    public Image out2;
+    public Image out3;
 
     private void Start()
     {
@@ -130,10 +138,51 @@ public class GameManager : MonoBehaviour
 
     IEnumerator strikeIns()
     {
-        strike.SetActive(true);
-        yield return new WaitForSeconds(2);
-        strike.SetActive(false);        
+        strikeObj.SetActive(true);
+        strike++;
+        if (strike == 1)
+        {
+            strike1.color = new Color32(253, 236, 4, 255);
+            yield return new WaitForSeconds(2);
+        }
+        if (strike == 2)
+        {
+            strike2.color = new Color32(253, 236, 4, 255);
+            yield return new WaitForSeconds(2);
+        }
+        if (strike == 3)
+        {
+            strike3.color = new Color32(253, 236, 4, 255);
+            yield return new WaitForSeconds(2);
+            strike1.color = new Color32(255, 255, 255, 255);
+            strike2.color = new Color32(255, 255, 255, 255);
+            strike3.color = new Color32(255, 255, 255, 255);
+            strike = 0;
+            outs++;
+        }
+
+        strikeObj.SetActive(false);
+
+        if (outs == 1)
+        {
+            out1.color = new Color32(244, 10, 1, 255);
+        }
+        if (outs == 2)
+        {
+            out2.color = new Color32(244, 10, 1, 255);
+        }
+        if (outs == 3)
+        {
+            out3.color = new Color32(244, 10, 1, 255);
+            yield return new WaitForSeconds(1);
+            out1.color = new Color32(255, 255, 255, 255);
+            out2.color = new Color32(255, 255, 255, 255);
+            out3.color = new Color32(255, 255, 255, 255);
+            outs = 0;
+        }
+        
         createIns();
+
     }
 
     IEnumerator homerunPage()
