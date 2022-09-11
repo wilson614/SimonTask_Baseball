@@ -37,6 +37,13 @@ public class GameManager : MonoBehaviour
     int inning = 1;
     int totalRunsOp = 0;
 
+    public GameObject catchAudio;
+    public GameObject strikeAudio;
+    public GameObject strikeOutAudio;
+    public GameObject hitAudio;
+    public GameObject lostAudio;
+    public GameObject playBallAudio;
+
     private void Start()
     {
         createIns();
@@ -51,7 +58,7 @@ public class GameManager : MonoBehaviour
 
             }
             else
-            {
+            {                
                 pitch = false;
                 isOpen = false;
                 Destroy(ball.gameObject);
@@ -138,6 +145,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator playBall()
     {
+        Instantiate(playBallAudio, Vector2.zero, Quaternion.identity);
         point.enabled = true;
         yield return new WaitForSeconds(1);
         point.enabled = false;
@@ -145,20 +153,24 @@ public class GameManager : MonoBehaviour
 
     IEnumerator strikeIns()
     {
+        Instantiate(catchAudio, Vector2.zero, Quaternion.identity);
         strikeObj.SetActive(true);
         strike++;
         if (strike == 1)
         {
+            Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);
             strike1.color = new Color32(253, 236, 4, 255);
             yield return new WaitForSeconds(2);
         }
         if (strike == 2)
         {
+            Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);
             strike2.color = new Color32(253, 236, 4, 255);
             yield return new WaitForSeconds(2);
         }
         if (strike == 3)
         {
+            Instantiate(strikeOutAudio, Vector2.zero, Quaternion.identity);
             strike3.color = new Color32(253, 236, 4, 255);
             yield return new WaitForSeconds(2);
             strike1.color = new Color32(255, 255, 255, 255);
@@ -198,9 +210,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator homerunPage()
     {
+        Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
         homerun.SetActive(true);
         yield return new WaitForSeconds(1);
         runPage.SetActive(true);
+        Instantiate(lostAudio, Vector2.zero, Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
         homerun.SetActive(false);
         runPage.SetActive(false);
