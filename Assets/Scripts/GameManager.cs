@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public Image point;
     public GameObject strikeObj;
     public GameObject homerun;
-    public GameObject run;
+    public GameObject runPage;
     int strike = 0;
     int outs = 0;
     public Image strike1;
@@ -29,6 +29,13 @@ public class GameManager : MonoBehaviour
     public Image out1;
     public Image out2;
     public Image out3;
+    public Text runs;
+    public Text runsOp;
+    public Text total;
+    public Text totalOp;
+    int currentRun;
+    int inning = 1;
+    int totalRunsOp = 0;
 
     private void Start()
     {
@@ -174,25 +181,34 @@ public class GameManager : MonoBehaviour
         if (outs == 3)
         {
             out3.color = new Color32(244, 10, 1, 255);
+            runsOp.text = currentRun.ToString();
+            currentRun = 0;
+            runsOp.enabled = true;
+            runsOp = Instantiate(runsOp, new Vector3(-39.5f + 46 * inning, 9.15f, 0), Quaternion.identity) as Text;
+            runsOp.transform.SetParent(GameObject.FindGameObjectWithTag("runs").transform, false);
+            runsOp.enabled = false;
             yield return new WaitForSeconds(1);
             out1.color = new Color32(255, 255, 255, 255);
             out2.color = new Color32(255, 255, 255, 255);
             out3.color = new Color32(255, 255, 255, 255);
             outs = 0;
-        }
-        
+        }  
         createIns();
-
     }
 
     IEnumerator homerunPage()
     {
         homerun.SetActive(true);
         yield return new WaitForSeconds(1);
-        run.SetActive(true);
+        runPage.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         homerun.SetActive(false);
-        run.SetActive(false);
+        runPage.SetActive(false);
+        currentRun++;
+        totalRunsOp++;
+        runsOp.text = currentRun.ToString();
+        runsOp.enabled = true;
+        totalOp.text = totalRunsOp.ToString();
         createIns();
     }
 
