@@ -27,7 +27,7 @@ public class FunCryOptionManager : MonoBehaviour
     public float markMoveSpeed;
     [Header("標記旋轉速度")]
     public float markRotateSpeed;
-
+    public float targetMark_X;
     [Space(10)]
     [Header("選項狀態")]
     public bool ok;
@@ -52,7 +52,7 @@ public class FunCryOptionManager : MonoBehaviour
 
     private void Start()
     {
-        tagetMark.anchoredPosition = new Vector3(708, buttons[index].GetComponent<RectTransform>().anchoredPosition.y - 119f, 0);
+        tagetMark.anchoredPosition = new Vector3(targetMark_X, buttons[index].GetComponent<RectTransform>().anchoredPosition.y - 119f, 0);
     }
 
     private void Update()
