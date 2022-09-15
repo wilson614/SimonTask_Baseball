@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
-    [SerializeField] GameObject hand;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,12 +13,6 @@ public class HandController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hand.active)
-        {
-            RuleManager.Instance.RuleTurnOn();
-        } else
-        {
-            RuleManager.Instance.RuleTurnOff();
-        }
+        
     }
 }

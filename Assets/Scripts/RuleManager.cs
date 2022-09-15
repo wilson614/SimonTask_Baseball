@@ -38,8 +38,7 @@ public class RuleManager : MonoBehaviour
     CanvasGroup canvasGroup;
 
     private void Start()
-    {
-        DontDestroyOnLoad(this);
+    {        
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
