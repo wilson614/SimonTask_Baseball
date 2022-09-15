@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     int totalRunsOp = 0;
     public Image hrBoard;
     public GameObject KBoard;
+    int totalBall = 10;
+    int ballCount = 0;
 
     public GameObject catchAudio;
     public GameObject strikeAudio;
@@ -64,18 +66,23 @@ public class GameManager : MonoBehaviour
                 pitch = false;
                 isOpen = false;
                 Destroy(ball.gameObject);
-                createBall();
+                ballCount++;
                 if (choose == instruction)
                 {
                     StartCoroutine(strikeIns());
-                } else
+                }
+                else
                 {
-                    StartCoroutine(homerunPage());                    
-                }                
+                    StartCoroutine(homerunPage());
+                }
+                if (ballCount < totalBall)
+                {
+                    createBall();                                        
+                }
             }
-
         }
     }
+
     public void openHands()
     {
         Debug.Log("Open hand");
@@ -155,48 +162,24 @@ public class GameManager : MonoBehaviour
 
     IEnumerator strikeIns()
     {
-        Instantiate(catchAudio, Vector2.zero, Quaternion.identity);
-        strike++;
-        if (strike < 3)
+        Instantiate(catchAudio, Vector2.zero, Quaternion.identity);    
+        strikeObj.SetActive(true);
+        Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);            
+        yield return new WaitForSeconds(2);
+        strikeObj.SetActive(false);
+        if (ballCount < totalBall)
         {
-            strikeObj.SetActive(true);
-            Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);
-            checkLight();
-            yield return new WaitForSeconds(2);
-            strikeObj.SetActive(false);
+            createIns();
         } else
         {
-            //(strike == 3)
-            Instantiate(strikeOutAudio, Vector2.zero, Quaternion.identity);
-            KBoard.SetActive(true);
-            checkLight();
-            yield return new WaitForSeconds(2);
-            KBoard.SetActive(false);            
-            strike = 0;
-            outs++;
-            checkLight();            
+            answerReset();
         }
-
-        if (outs == 3)
-        {
-            runsOp.text = currentRun.ToString();
-            currentRun = 0;
-            runsOp.enabled = true;
-            runsOp = Instantiate(runsOp, new Vector3(-39.5f + 46 * inning, 9.15f, 0), Quaternion.identity) as Text;
-            runsOp.transform.SetParent(GameObject.FindGameObjectWithTag("runs").transform, false);
-            runsOp.enabled = false;
-            yield return new WaitForSeconds(1);
-            outs = 0;
-            checkLight();
-        }  
-        createIns();
     }
 
     IEnumerator homerunPage()
     {
         Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
         strike = 0;
-        checkLight();
         homerun.SetActive(true);
         yield return new WaitForSeconds(1);
         hrBoard.enabled = true;
@@ -207,12 +190,14 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         homerun.SetActive(false);
         runPage.SetActive(false);
-        currentRun++;
-        totalRunsOp++;
-        runsOp.text = currentRun.ToString();
-        runsOp.enabled = true;
-        totalOp.text = totalRunsOp.ToString();
-        createIns();
+        if (ballCount < totalBall)
+        {
+            createIns();
+        }
+        else
+        {
+            answerReset();
+        }
     }
 
     public void createIns()
@@ -231,47 +216,5 @@ public class GameManager : MonoBehaviour
         }        
         StartCoroutine(playBall());
         canPitch = true;
-    }
-
-    private void checkLight()
-    {
-        if (strike >= 1)
-        {
-            strike1.color = new Color32(253, 236, 4, 255);
-            if (strike >= 2)
-            {
-                strike2.color = new Color32(253, 236, 4, 255);
-                if (strike == 3)
-                {
-                    strike3.color = new Color32(253, 236, 4, 255);
-                }
-            }
-        } else 
-        {
-            strike1.color = new Color32(0, 0, 0, 255);
-            strike2.color = new Color32(0, 0, 0, 255);
-            strike3.color = new Color32(0, 0, 0, 255);
-        }
-
-        if (outs >= 1)
-        {
-            out1.color = new Color32(244, 10, 1, 255);
-            if (outs >= 2)
-            {
-                out2.color = new Color32(244, 10, 1, 255);
-                if (outs == 3)
-                {
-                    out3.color = new Color32(244, 10, 1, 255);
-                }
-            }
-        }
-        else
-        {
-            out1.color = new Color32(0, 0, 0, 255);
-            out2.color = new Color32(0, 0, 0, 255);
-            out3.color = new Color32(0, 0, 0, 255);
-        }
-    }
-
-    
+    }    
 }
