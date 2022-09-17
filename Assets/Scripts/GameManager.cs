@@ -21,33 +21,18 @@ public class GameManager : MonoBehaviour
     public GameObject strikeObj;
     public GameObject homerun;
     public GameObject runPage;
-    int strike = 0;
-    int outs = 0;
-    public Image strike1;
-    public Image strike2;
-    public Image strike3;
-    public Image out1;
-    public Image out2;
-    public Image out3;
     public Image correctS;
     public Image wrongS;
-    public Text runs;
-    public Text runsOp;
-    public Text total;
-    public Text totalOp;
-    int currentRun;
-    int inning = 1;
-    int totalRunsOp = 0;
+
     public Image hrBoard;
     public GameObject KBoard;
     int totalBall = 10;
     int ballCount = 0;
     int correctCount = 0;
-    
+    int wrongCount = 0;
 
     public GameObject catchAudio;
     public GameObject strikeAudio;
-    public GameObject strikeOutAudio;
     public GameObject hitAudio;
     public GameObject lostAudio;
     public GameObject playBallAudio;
@@ -185,8 +170,8 @@ public class GameManager : MonoBehaviour
     IEnumerator homerunPage()
     {
         Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
-        strike = 0;
         Instantiate(wrongS, new Vector3(-288 + 65 * (ballCount - 1), -38, 0), Quaternion.identity).transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);
+        wrongCount++;
         homerun.SetActive(true);
         yield return new WaitForSeconds(1);
         hrBoard.enabled = true;
