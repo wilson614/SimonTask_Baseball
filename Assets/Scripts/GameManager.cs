@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public Image out1;
     public Image out2;
     public Image out3;
+    public Image correctS;
+    public Image wrongS;
     public Text runs;
     public Text runsOp;
     public Text total;
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour
     public GameObject KBoard;
     int totalBall = 10;
     int ballCount = 0;
+    int correctCount = 0;
+    
 
     public GameObject catchAudio;
     public GameObject strikeAudio;
@@ -164,7 +168,9 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(catchAudio, Vector2.zero, Quaternion.identity);    
         strikeObj.SetActive(true);
-        Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);            
+        Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);
+        correctCount++;
+        Instantiate(correctS, new Vector3(-288 + 64 * (ballCount - 1), -38, 0), Quaternion.identity).transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);       
         yield return new WaitForSeconds(2);
         strikeObj.SetActive(false);
         if (ballCount < totalBall)
@@ -180,6 +186,7 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
         strike = 0;
+        Instantiate(wrongS, new Vector3(-288 + 65 * (ballCount - 1), -38, 0), Quaternion.identity).transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);
         homerun.SetActive(true);
         yield return new WaitForSeconds(1);
         hrBoard.enabled = true;
