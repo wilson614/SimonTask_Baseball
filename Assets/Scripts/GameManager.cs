@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject runPage;
     public Image correctS;
     public Image wrongS;
+    public GameObject fingers;
 
     public Image hrBoard;
     public GameObject KBoard;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     int ballCount = 0;
     int correctCount = 0;
     int wrongCount = 0;
+    int level = 1;
 
     public GameObject catchAudio;
     public GameObject strikeAudio;
@@ -67,6 +69,10 @@ public class GameManager : MonoBehaviour
                 if (ballCount < totalBall)
                 {
                     createBall();                                        
+                } else
+                {
+                    ballCount = 0;
+                    level++;
                 }
             }
         }
@@ -196,6 +202,19 @@ public class GameManager : MonoBehaviour
     {
         answerReset();
         bubble.SetActive(true);
+        if (level >= 2)
+        {
+            //(0: 左45度, 1: 右45度)
+            int angle = Random.Range(0, 2);
+            if (angle == 0)
+            {
+                fingers.transform.localEulerAngles = new Vector3(0, 0, -45);
+            }
+            if (angle == 1)
+            {
+                fingers.transform.localEulerAngles = new Vector3(0, 0, 45);
+            }
+        }
         //(0: 投左, 1: 投右)
         instruction = Random.Range(0, 2);
         if (instruction == 0)
