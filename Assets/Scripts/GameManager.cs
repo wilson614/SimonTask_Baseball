@@ -24,10 +24,11 @@ public class GameManager : MonoBehaviour
     public Image correctS;
     public Image wrongS;
     public GameObject fingers;
+    public List<Image> answerS;
 
     public Image hrBoard;
     public GameObject KBoard;
-    int totalBall = 10;
+    int totalBall = 3;
     int ballCount = 0;
     int correctCount = 0;
     int wrongCount = 0;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
                 isOpen = false;
                 Destroy(ball.gameObject);
                 ballCount++;
+                createBall();
                 if (choose == instruction)
                 {
                     StartCoroutine(strikeIns());
@@ -65,14 +67,6 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     StartCoroutine(homerunPage());
-                }
-                if (ballCount < totalBall)
-                {
-                    createBall();                                        
-                } else
-                {
-                    ballCount = 0;
-                    level++;
                 }
             }
         }
@@ -161,7 +155,9 @@ public class GameManager : MonoBehaviour
         strikeObj.SetActive(true);
         Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);
         correctCount++;
-        Instantiate(correctS, new Vector3(-288 + 64 * (ballCount - 1), -38, 0), Quaternion.identity).transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);       
+        Image I = Instantiate(correctS, new Vector3(-288 + 64 * (ballCount - 1), -38, 0), Quaternion.identity) as Image;
+        I.transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);
+        answerS.Add(I);
         yield return new WaitForSeconds(2);
         strikeObj.SetActive(false);
         if (ballCount < totalBall)
@@ -171,6 +167,10 @@ public class GameManager : MonoBehaviour
         {
             answerReset();
         }
+        if (ballCount == totalBall)
+        {
+            nextLevel();
+        }        
     }
 
     IEnumerator homerunPage()
@@ -196,8 +196,24 @@ public class GameManager : MonoBehaviour
         {
             answerReset();
         }
+        if (ballCount == totalBall)
+        {
+            nextLevel();
+        }
     }
 
+    private void nextLevel()
+    {
+        ballCount = 0;
+        level++;        
+        foreach (Image item in answerS)
+        {
+            Destroy(item);
+        }
+        createIns();
+    }
+
+    
     public void createIns()
     {
         answerReset();

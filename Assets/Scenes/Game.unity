@@ -1535,7 +1535,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592760212}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3450,6 +3450,7 @@ MonoBehaviour:
     type: 3}
   wrongS: {fileID: 7351931826849357957, guid: 6a344f6f4248b4349a148f2b545baacd, type: 3}
   fingers: {fileID: 56619921}
+  answerS: []
   hrBoard: {fileID: 1596832465}
   KBoard: {fileID: 1374897276}
   catchAudio: {fileID: 584697098518046485, guid: 5c4f97b420e169d47974af8a37732832,
