@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class FunCryOptionManager : MonoBehaviour
 {
+    public enum OptionType { option, Rule }
+
+    public OptionType optionType;
+    
     [Header("選項的父母")]
     public Transform optionsParent;
     [Header("選項們")]
@@ -33,6 +37,8 @@ public class FunCryOptionManager : MonoBehaviour
     public bool ok;
     public bool isCheck;
 
+    private RuleManager ruleManager;
+
     int index;
 
     private void OnValidate()
@@ -48,6 +54,8 @@ public class FunCryOptionManager : MonoBehaviour
         {
             options[i] = optionsParent.GetChild(i).gameObject.GetComponent<RectTransform>();
         }
+
+        ruleManager = GetComponent<RuleManager>();
     }
 
     private void Start()
@@ -59,9 +67,18 @@ public class FunCryOptionManager : MonoBehaviour
     {
         TagetMarkSwing();
 
+        if (optionType == OptionType.Rule) {
+            if (ruleManager != null)
+                if (ruleManager.canvasGroup.alpha == 0)
+                {
+                    return;
+                }
+                    }
         if (isCheck)
         {
             buttons[index].onClick.Invoke();
+            if (optionType == OptionType.Rule)
+                FindObjectOfType<GameManager>().createIns();
             ok = false;
             isCheck = false;
 

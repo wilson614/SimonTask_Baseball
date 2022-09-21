@@ -31,11 +31,11 @@ public class RuleManager : MonoBehaviour
     [Header("規則圖")]
     [SerializeField] Sprite[] rules;
 
-    [SerializeField] int ruleIndex;
+    public int ruleIndex;
     [SerializeField] Leap.Unity.PinchDetector pinchDetector;
     [SerializeField] FunCryOptionManager FunCryOptionManager;
 
-    CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
 
     private void Start()
     {        

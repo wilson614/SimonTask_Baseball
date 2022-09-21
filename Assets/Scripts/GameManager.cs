@@ -210,7 +210,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(item);
         }
-        createIns();
+        RuleManager.Instance.ruleIndex = level;
+        RuleManager.Instance.RuleTurnOn();        
     }
 
     

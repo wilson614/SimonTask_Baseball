@@ -2808,6 +2808,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5774816207955111776, guid: 4d0e1771b80081e44a9a0bb0297ed822,
         type: 3}
+      propertyPath: optionType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774816207955111776, guid: 4d0e1771b80081e44a9a0bb0297ed822,
+        type: 3}
       propertyPath: targetMark_X
       value: 1520
       objectReference: {fileID: 0}
