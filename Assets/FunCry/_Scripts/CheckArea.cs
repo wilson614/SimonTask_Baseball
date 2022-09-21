@@ -4,6 +4,27 @@ using UnityEngine;
 
 public class CheckArea : MonoBehaviour
 {
+    #region Singleton
+    private static CheckArea _instance;
+
+    public static CheckArea Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<CheckArea>();
+                if (_instance == null)
+                {
+                    Debug.LogError("CheckArea is null");
+                }
+            }
+
+            return _instance;
+        }
+    }
+    #endregion
+
     [SerializeField] Transform checkAreaCamera;
     [SerializeField] Transform hand;
     [SerializeField] Transform ballHand;
@@ -12,6 +33,8 @@ public class CheckArea : MonoBehaviour
     [SerializeField] Vector3 handPosition;
     [SerializeField] Vector3 maxArea;
     [SerializeField] Vector3 minArea;
+
+    public bool handIsNull;
 
     private void Start()
     {
@@ -94,6 +117,7 @@ public class CheckArea : MonoBehaviour
 
     void OverArea()
     {
+        handIsNull = true;
         foreach (LineRenderer material in lineMaterials)
         {
             material.materials[0].color = Color.red;
@@ -102,6 +126,7 @@ public class CheckArea : MonoBehaviour
 
     void InsideArea()
     {
+        handIsNull = false;
         foreach (LineRenderer material in lineMaterials)
         {
             material.materials[0].color = Color.green;

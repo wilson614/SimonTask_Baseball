@@ -74,6 +74,10 @@ public class FunCryOptionManager : MonoBehaviour
                     return;
                 }
                     }
+
+
+        if (CheckArea.Instance.handIsNull)
+            return;
         if (isCheck)
         {
             buttons[index].onClick.Invoke();
