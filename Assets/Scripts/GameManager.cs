@@ -176,7 +176,9 @@ public class GameManager : MonoBehaviour
     IEnumerator homerunPage()
     {
         Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
-        Instantiate(wrongS, new Vector3(-288 + 65 * (ballCount - 1), -38, 0), Quaternion.identity).transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);
+        Image I = Instantiate(wrongS, new Vector3(-288 + 65 * (ballCount - 1), -38, 0), Quaternion.identity) as Image;
+        I.transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);
+        answerS.Add(I);
         wrongCount++;
         homerun.SetActive(true);
         yield return new WaitForSeconds(1);
