@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     public Image point;
     public GameObject strikeObj;
     public GameObject homerun;
-    public GameObject runPage;
     public Image correctS;
     public Image wrongS;
     public GameObject fingers;
@@ -185,11 +184,9 @@ public class GameManager : MonoBehaviour
         hrBoard.enabled = true;
         yield return new WaitForSeconds(1.5f);
         hrBoard.enabled = false;
-        runPage.SetActive(true);
         Instantiate(lostAudio, Vector2.zero, Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
         homerun.SetActive(false);
-        runPage.SetActive(false);
         if (ballCount < totalBall)
         {
             createIns();
