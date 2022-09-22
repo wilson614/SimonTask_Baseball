@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     public Image hrBoard;
     public GameObject KBoard;
-    int totalBall = 3;
+    int totalBall = 10;
     int ballCount = 0;
     int correctCount = 0;
     int wrongCount = 0;
@@ -129,6 +129,8 @@ public class GameManager : MonoBehaviour
     {
         finger1.enabled = false;
         finger3.enabled = false;
+        //翻轉重置
+        fingers.transform.localScale = new Vector3(1, 1, 1);
         bubble.SetActive(false);
         canPitch = false;
     }
@@ -218,6 +220,16 @@ public class GameManager : MonoBehaviour
     {
         answerReset();
         bubble.SetActive(true);
+        int isFlipped = 0;
+        if (level == 3)
+        {
+            //(0: 不翻轉, 1: 翻轉)
+            isFlipped = Random.Range(0, 2);            
+            if (isFlipped == 1)
+            {
+                fingers.transform.localScale = new Vector3(1, -1, 1);
+            }
+        }
         if (level >= 2)
         {
             //(0: 左45度, 1: 右45度)
@@ -235,11 +247,24 @@ public class GameManager : MonoBehaviour
         instruction = Random.Range(0, 2);
         if (instruction == 0)
         {
-            finger1.enabled = true;
+            if (isFlipped == 1)
+            {
+                finger3.enabled = true;
+            } else
+            {
+                finger1.enabled = true;
+            }            
         }
         if (instruction == 1)
         {
-            finger3.enabled = true;
+            if (isFlipped == 1)
+            {
+                finger1.enabled = true;
+            }
+            else
+            {
+                finger3.enabled = true;
+            }
         }        
         StartCoroutine(playBall());
         canPitch = true;
