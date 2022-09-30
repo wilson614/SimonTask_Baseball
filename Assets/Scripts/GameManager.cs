@@ -284,6 +284,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(playBall());
         StartCoroutine(Countdown());
         canPitch = true;
+        isOpen = false;
     }
 
     IEnumerator Countdown()
