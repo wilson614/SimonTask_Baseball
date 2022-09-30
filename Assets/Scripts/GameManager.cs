@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
     public GameObject fingers;
     public List<Image> answerS;
 
+    public int cd;
+    public Text timer;
+    public Image overPitch;
+
     public Image hrBoard;
     public GameObject KBoard;
     int totalBall = 10;
@@ -94,6 +98,7 @@ public class GameManager : MonoBehaviour
             wrong.enabled = true;
         }
         pitch = true;
+        cd = -1;
     }
     public void pitchLeft()
     {
@@ -127,8 +132,10 @@ public class GameManager : MonoBehaviour
 
     private void pitchReset()
     {
+        timer.enabled = false;
+
         finger1.enabled = false;
-        finger3.enabled = false;
+        finger3.enabled = false;        
         //翻轉重置
         fingers.transform.localScale = new Vector3(1, 1, 1);
         bubble.SetActive(false);
@@ -145,7 +152,7 @@ public class GameManager : MonoBehaviour
     IEnumerator playBall()
     {
         Instantiate(playBallAudio, Vector2.zero, Quaternion.identity);
-        point.enabled = true;
+        point.enabled = true;        
         yield return new WaitForSeconds(1);
         point.enabled = false;
     }
@@ -184,10 +191,10 @@ public class GameManager : MonoBehaviour
         homerun.SetActive(true);
         yield return new WaitForSeconds(1);
         hrBoard.enabled = true;
-        yield return new WaitForSeconds(1.5f);
-        hrBoard.enabled = false;
+        yield return new WaitForSeconds(1.5f);        
         Instantiate(lostAudio, Vector2.zero, Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
+        hrBoard.enabled = false;
         homerun.SetActive(false);
         if (ballCount < totalBall)
         {
@@ -219,6 +226,7 @@ public class GameManager : MonoBehaviour
     public void createIns()
     {
         answerReset();
+        overPitch.enabled = false;
         bubble.SetActive(true);
         int isFlipped = 0;
         if (level == 3)
@@ -267,6 +275,38 @@ public class GameManager : MonoBehaviour
             }
         }        
         StartCoroutine(playBall());
+        StartCoroutine(Countdown());
         canPitch = true;
-    }    
+    }
+
+    IEnumerator Countdown()
+    {
+        timer.enabled = true;
+
+        while (cd > 0)       //如果時間尚未結束
+        {
+            yield return new WaitForSeconds(1); //等候一秒再次執行
+
+            cd--;            //將秒數減 1
+
+            if (cd < 0)      //如果秒數小於 0 代表停止計時 
+            {
+                cd = -1;     //設定秒數等於 -1
+                break;       //跳出迴圈停止計時
+            }
+            timer.text = cd.ToString();
+        }
+
+        yield return new WaitForSeconds(1);     //時間結束時，顯示 0 停留一秒
+
+        if (cd == 0)
+        {
+            overPitch.enabled = true;           //時間結束時，畫面出現驚嘆號
+            choose = 99;
+            pitchReset();
+            compareAnswer();            
+        }
+        cd = 10;
+        timer.text = cd.ToString();
+    }
 }
