@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FunCryOptionManager : MonoBehaviour
 {
-    public enum OptionType { option, Rule }
+    public enum OptionType { option, Rule, Game }
 
     public OptionType optionType;
     
@@ -56,7 +56,10 @@ public class FunCryOptionManager : MonoBehaviour
             options[i] = optionsParent.GetChild(i).gameObject.GetComponent<RectTransform>();
         }
 
-        ruleManager = GetComponent<RuleManager>();
+        if(optionType == OptionType.Rule)
+            ruleManager = GetComponent<RuleManager>();
+        if (optionType == OptionType.Game)
+            GetComponent<CanvasGroup>().alpha = 0;
         g = FindObjectOfType<GameManager>();
     }
 
@@ -76,6 +79,14 @@ public class FunCryOptionManager : MonoBehaviour
                     return;
                 }
                     }
+
+        if (optionType == OptionType.Game)
+        {
+            if (GetComponent<CanvasGroup>().alpha == 0)
+            {
+                return;
+            }
+        }
 
 
         if (CheckArea.Instance.handIsNull)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RuleManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class RuleManager : MonoBehaviour
     [SerializeField] FunCryOptionManager FunCryOptionManager;
 
     public CanvasGroup canvasGroup;
+    public CanvasGroup statistics;
 
     private void Start()
     {        
@@ -65,11 +67,18 @@ public class RuleManager : MonoBehaviour
     } 
 
     public void RuleTurnOn()
-    {
+    {      
+        if(ruleIndex > 3)
+        {
+            statistics.alpha = 1;
+            statistics.interactable = true;
+            statistics.blocksRaycasts = true;
+            CheckArea.Instance.transform.GetComponentInParent<Canvas>().sortingOrder = -1;
+            return;
+        }
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
-
         ruleImage.sprite = rules[ruleIndex - 1];
         
     }
