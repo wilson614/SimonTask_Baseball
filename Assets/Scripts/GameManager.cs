@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public Image wrongS;
     public GameObject fingers;
     public List<Image> answerS;
+    public Text statisticsText;
 
     public int cd;
     public Text timer;
@@ -31,11 +32,12 @@ public class GameManager : MonoBehaviour
 
     public Image hrBoard;
     public GameObject KBoard;
-    int totalBall = 10;
+    int totalBall = 2;
     int ballCount = 0;
     int correctCount = 0;
     int wrongCount = 0;
     int level = 1;
+    int score = 0;
 
     public GameObject catchAudio;
     public GameObject strikeAudio;
@@ -92,12 +94,13 @@ public class GameManager : MonoBehaviour
         if (choose == instruction)
         {
             correct.enabled = true;
+            score += cd;
         }
         else
         {
             wrong.enabled = true;
         }
-        pitch = true;
+        pitch = true;        
         cd = -1;
     }
     public void pitchLeft()
@@ -217,6 +220,10 @@ public class GameManager : MonoBehaviour
         foreach (Image item in answerS)
         {
             Destroy(item);
+        }
+        if (level > 3)
+        {
+            statisticsText.text = "總分：" + score / 3 + " 分" + "\n準確率：" + Mathf.Round(((float)correctCount / (totalBall * 3)) * 100) + "%";
         }
         RuleManager.Instance.ruleIndex = level;
         RuleManager.Instance.RuleTurnOn();        
