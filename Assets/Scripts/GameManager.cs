@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public List<Image> answerS;
     public Text statisticsText;
 
-    public int cd;
+    public float cd;
     public Text timer;
     public Image overPitch;
 
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     int correctCount = 0;
     int wrongCount = 0;
     int level = 1;
-    int score = 0;
+    float score = 0;
 
     public GameObject catchAudio;
     public GameObject strikeAudio;
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
         }
         if (level > 3)
         {
-            statisticsText.text = "總分：" + score / 3 + " 分" + "\n準確率：" + Mathf.Round(((float)correctCount / (totalBall * 3)) * 100) + "%";
+            statisticsText.text = "總分：" + Mathf.Ceil(score / 3 * 10) + " 分" + "\n準確率：" + Mathf.Round(((float)correctCount / (totalBall * 3)) * 100) + "%";
         }
         RuleManager.Instance.ruleIndex = level;
         RuleManager.Instance.RuleTurnOn();        
@@ -292,21 +292,19 @@ public class GameManager : MonoBehaviour
 
         while (cd > 0)       //如果時間尚未結束
         {
-            yield return new WaitForSeconds(1); //等候一秒再次執行
+            yield return new WaitForSeconds(0.1f); //等候一秒再次執行
 
-            cd--;            //將秒數減 1
+            cd -= 0.1f;            //將秒數減 1
 
-            if (cd < 0)      //如果秒數小於 0 代表停止計時 
+            if (cd <= -1)      //如果秒數小於 -1 代表有作答 
             {
                 cd = -1;     //設定秒數等於 -1
                 break;       //跳出迴圈停止計時
             }
-            timer.text = cd.ToString();
+            timer.text = cd.ToString("0");
         }
 
-        yield return new WaitForSeconds(1);     //時間結束時，顯示 0 停留一秒
-
-        if (cd == 0)
+        if (cd < 0 && cd != -1)
         {
             overPitch.enabled = true;           //時間結束時，畫面出現驚嘆號
             choose = 99;
@@ -314,6 +312,6 @@ public class GameManager : MonoBehaviour
             compareAnswer();            
         }
         cd = 10;
-        timer.text = cd.ToString();
+        timer.text = cd.ToString("0");
     }
 }
