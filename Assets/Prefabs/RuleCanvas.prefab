@@ -231,7 +231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -58.916}
+  m_AnchoredPosition: {x: 0, y: -58.915955}
   m_SizeDelta: {x: 0, y: -117.8313}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5774816207400637199
@@ -326,7 +326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5774816207862249506
 RectTransform:
   m_ObjectHideFlags: 0
@@ -531,6 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29096b39c76729a4688b21161b6d9e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionType: 0
   optionsParent: {fileID: 5774816207382432869}
   options:
   - {fileID: 5774816209221676386}
@@ -543,6 +544,7 @@ MonoBehaviour:
   sliderSpeed: 5
   markMoveSpeed: 0
   markRotateSpeed: 200
+  targetMark_X: 0
   ok: 0
   isCheck: 0
 --- !u!114 &1982552710430197906
@@ -565,6 +567,7 @@ MonoBehaviour:
   ruleIndex: 1
   pinchDetector: {fileID: 0}
   FunCryOptionManager: {fileID: 5774816207955111776}
+  canvasGroup: {fileID: 0}
 --- !u!1 &5774816208076761559
 GameObject:
   m_ObjectHideFlags: 0

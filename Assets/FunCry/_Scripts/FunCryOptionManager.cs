@@ -36,6 +36,7 @@ public class FunCryOptionManager : MonoBehaviour
     [Header("選項狀態")]
     public bool ok;
     public bool isCheck;
+    GameManager g;
 
     private RuleManager ruleManager;
 
@@ -56,6 +57,7 @@ public class FunCryOptionManager : MonoBehaviour
         }
 
         ruleManager = GetComponent<RuleManager>();
+        g = FindObjectOfType<GameManager>();
     }
 
     private void Start()
@@ -81,8 +83,10 @@ public class FunCryOptionManager : MonoBehaviour
         if (isCheck)
         {
             buttons[index].onClick.Invoke();
-            if (optionType == OptionType.Rule)
-                FindObjectOfType<GameManager>().createIns();
+            if (optionType == OptionType.Rule && g != null)
+            {
+                g.createIns();
+            }                
             ok = false;
             isCheck = false;
 

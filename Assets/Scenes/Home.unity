@@ -976,6 +976,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FunCry's 3D CheckArea_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6043831212311416258, guid: 64c3c91db6872904496ce250a5a78f27,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -99
+      objectReference: {fileID: 0}
     - target: {fileID: 6043831212311416261, guid: 64c3c91db6872904496ce250a5a78f27,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2271,6 +2276,11 @@ PrefabInstance:
       propertyPath: m_ChildAlignment
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5451384770951070710, guid: 08d8338f5d84fdf42a35c0fa5a042ba6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -58.915955
+      objectReference: {fileID: 0}
     - target: {fileID: 5451384771096265771, guid: 08d8338f5d84fdf42a35c0fa5a042ba6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2920,6 +2930,24 @@ PrefabInstance:
       propertyPath: pinchDetector
       value: 
       objectReference: {fileID: 684579912}
+    - target: {fileID: 1982552710430197906, guid: 4d0e1771b80081e44a9a0bb0297ed822,
+        type: 3}
+      propertyPath: rules.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 66d522bdcce249d4886f3be8fd11cccf,
+        type: 3}
+    - target: {fileID: 1982552710430197906, guid: 4d0e1771b80081e44a9a0bb0297ed822,
+        type: 3}
+      propertyPath: rules.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: b1c4101fa4101cf40adedf19ea5cd7ac,
+        type: 3}
+    - target: {fileID: 1982552710430197906, guid: 4d0e1771b80081e44a9a0bb0297ed822,
+        type: 3}
+      propertyPath: rules.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: c6cdcdf110200234091bb2d095e436d2,
+        type: 3}
     - target: {fileID: 5774816207271840696, guid: 4d0e1771b80081e44a9a0bb0297ed822,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2929,6 +2957,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -949
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774816207862249507, guid: 4d0e1771b80081e44a9a0bb0297ed822,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774816207862249517, guid: 4d0e1771b80081e44a9a0bb0297ed822,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5774816207955111776, guid: 4d0e1771b80081e44a9a0bb0297ed822,
         type: 3}
