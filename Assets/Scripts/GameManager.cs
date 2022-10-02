@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public Image hrBoard;
     public GameObject KBoard;
-    int totalBall = 2;
+    int totalBall = 10;
     int ballCount = 0;
     int correctCount = 0;
     int wrongCount = 0;
