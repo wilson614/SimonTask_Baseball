@@ -3108,7 +3108,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522896254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c057ae8396c1146c98a146b81dcc5870, type: 3}
   m_Name: 
@@ -3137,7 +3137,7 @@ MonoBehaviour:
   TargetObject: {fileID: 0}
   OnAngle: 30
   OffAngle: 40
-  ShowGizmos: 1
+  ShowGizmos: 0
 --- !u!114 &1522896258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3145,7 +3145,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522896254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c057ae8396c1146c98a146b81dcc5870, type: 3}
   m_Name: 
@@ -3174,6 +3174,44 @@ MonoBehaviour:
   TargetObject: {fileID: 0}
   OnAngle: 30
   OffAngle: 40
+  ShowGizmos: 0
+--- !u!114 &1522896259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522896254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b77174815b904166ad047382f534c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1907179407}
+        m_MethodName: pitchLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  Period: 0.1
+  HandModel: {fileID: 1522896255}
+  FingerName: 1
+  PointingType: 2
+  PointingDirection: {x: -0.5, y: 0, z: 1}
+  TargetObject: {fileID: 0}
+  OnAngle: 50
+  OffAngle: 50
   ShowGizmos: 1
 --- !u!114 &1522896260
 MonoBehaviour:
@@ -3182,7 +3220,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522896254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e98e641d160144e87a3d33fcdb893a02, type: 3}
   m_Name: 
@@ -3224,7 +3262,7 @@ MonoBehaviour:
   Pinky: 1
   MinimumExtendedCount: 3
   MaximumExtendedCount: 3
-  ShowGizmos: 1
+  ShowGizmos: 0
 --- !u!114 &1522896261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3292,6 +3330,121 @@ MonoBehaviour:
   ShowGizmos: 1
   ActivateDistance: 0.03
   DeactivateDistance: 0.04
+--- !u!114 &1522896262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522896254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b77174815b904166ad047382f534c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1907179407}
+        m_MethodName: pitchRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  Period: 0.1
+  HandModel: {fileID: 1522896255}
+  FingerName: 1
+  PointingType: 2
+  PointingDirection: {x: 0.5, y: 0, z: 1}
+  TargetObject: {fileID: 0}
+  OnAngle: 50
+  OffAngle: 50
+  ShowGizmos: 1
+--- !u!114 &1522896264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522896254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98e641d160144e87a3d33fcdb893a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1907179407}
+        m_MethodName: openHands
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  Period: 0
+  HandModel: {fileID: 1522896255}
+  Thumb: 1
+  Index: 1
+  Middle: 1
+  Ring: 1
+  Pinky: 1
+  MinimumExtendedCount: 0
+  MaximumExtendedCount: 0
+  ShowGizmos: 1
+--- !u!114 &1522896265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522896254}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b77174815b904166ad047382f534c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1907179407}
+        m_MethodName: openHands
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  Period: 0.1
+  HandModel: {fileID: 1522896255}
+  FingerName: 1
+  PointingType: 1
+  PointingDirection: {x: 0, y: 0, z: 1}
+  TargetObject: {fileID: 0}
+  OnAngle: 20
+  OffAngle: 20
+  ShowGizmos: 0
 --- !u!1 &1562432274
 GameObject:
   m_ObjectHideFlags: 0

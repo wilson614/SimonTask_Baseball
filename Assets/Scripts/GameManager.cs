@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             else
             {                
                 pitch = false;
-                isOpen = false;
+                // isOpen = false;
                 Destroy(ball.gameObject);
                 ballCount++;
                 createBall();
@@ -110,8 +110,7 @@ public class GameManager : MonoBehaviour
             choose = 0;
             pitchReset();
             compareAnswer();
-            Debug.Log("pitchLeft");
-                        
+            Debug.Log("pitchLeft");                                 
         }
         
     }
