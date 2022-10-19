@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         createIns();
+        isOpen = true;
     }
     private void Update()
     {
@@ -283,7 +284,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(playBall());
         StartCoroutine(Countdown());
         canPitch = true;
-        isOpen = false;
+        // isOpen = false;
     }
 
     IEnumerator Countdown()

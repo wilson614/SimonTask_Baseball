@@ -3208,10 +3208,10 @@ MonoBehaviour:
   HandModel: {fileID: 1522896255}
   FingerName: 1
   PointingType: 2
-  PointingDirection: {x: -0.5, y: 0, z: 1}
+  PointingDirection: {x: -5, y: 1, z: 1}
   TargetObject: {fileID: 0}
-  OnAngle: 50
-  OffAngle: 50
+  OnAngle: 65
+  OffAngle: 65
   ShowGizmos: 1
 --- !u!114 &1522896260
 MonoBehaviour:
@@ -3363,10 +3363,10 @@ MonoBehaviour:
   HandModel: {fileID: 1522896255}
   FingerName: 1
   PointingType: 2
-  PointingDirection: {x: 0.5, y: 0, z: 1}
+  PointingDirection: {x: 5, y: 1, z: 1}
   TargetObject: {fileID: 0}
-  OnAngle: 50
-  OffAngle: 50
+  OnAngle: 65
+  OffAngle: 65
   ShowGizmos: 1
 --- !u!114 &1522896264
 MonoBehaviour:
