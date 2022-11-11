@@ -8,18 +8,21 @@ public class GameManager : MonoBehaviour
     public bool isOpen;
     public bool canPitch = false;
     public Image ball;
-    float speed = 1000f;
+    float speed = 1300f;
     bool pitch = false;
     int instruction;
     int choose;
     public Image correct;
     public Image wrong;
-    public Image finger1;
-    public Image finger3;
+    public Image pitcher1;
+    public Image pitcher3;
+    public Image pitcherDefault;
     public GameObject bubble;
     public Image point;
     public GameObject strikeObj;
     public GameObject homerun;
+    public GameObject hit;
+    public GameObject hrBall;
     public Image correctS;
     public Image wrongS;
     public GameObject fingers;
@@ -40,7 +43,7 @@ public class GameManager : MonoBehaviour
     float score = 0;
 
     public GameObject catchAudio;
-    public GameObject strikeAudio;
+    public GameObject strikeOutAudio;
     public GameObject hitAudio;
     public GameObject lostAudio;
     public GameObject playBallAudio;
@@ -53,28 +56,42 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (pitch == true)
-        {            
-            if (ball.transform.localPosition.x != 483)
+        {
+            if (choose == instruction)
             {
-                ball.transform.localPosition = Vector3.MoveTowards(ball.transform.localPosition, new Vector3(483, 184, 0), speed * Time.deltaTime);
-
-            }
-            else
-            {                
-                pitch = false;
-                // isOpen = false;
-                Destroy(ball.gameObject);
-                ballCount++;
-                createBall();
-                if (choose == instruction)
+                if (ball.transform.localPosition.y != -840)
                 {
-                    StartCoroutine(strikeIns());
+                    ball.transform.localPosition = Vector3.MoveTowards(ball.transform.localPosition, new Vector3(0, -840, 0), speed * Time.deltaTime);
+
                 }
                 else
                 {
+                    pitch = false;
+                    // isOpen = false;
+                    Destroy(ball.gameObject);
+                    ballCount++;
+                    createBall();
                     StartCoroutine(homerunPage());
-                }
+                }                
             }
+            else
+            {
+                if (ball.transform.localPosition.y != -1223)
+                {
+                    ball.transform.localPosition = Vector3.MoveTowards(ball.transform.localPosition, new Vector3(0, -1223, 0), speed * Time.deltaTime);
+
+                }
+                else
+                {
+                    pitch = false;
+                    // isOpen = false;
+                    Destroy(ball.gameObject);
+                    ballCount++;
+                    createBall();
+                    StartCoroutine(strikeout());
+                }                
+            }
+            
         }
     }
 
@@ -101,27 +118,29 @@ public class GameManager : MonoBehaviour
         {
             wrong.enabled = true;
         }
+        pitcherDefault.enabled = true;
+        ball.enabled = true;
         pitch = true;        
         cd = -1;
     }
-    public void pitchLeft()
+    public void hitLeft()
     {
         if (canPitch && isOpen)
         {
             choose = 0;
-            pitchReset();
+            hitReset();
             compareAnswer();
             Debug.Log("pitchLeft");                                 
         }
         
     }
 
-    public void pitchRight()
+    public void hitRight()
     {
         if (canPitch && isOpen)
         {
             choose = 1;
-            pitchReset();
+            hitReset();
             compareAnswer();
             Debug.Log("pitchRight");
         }
@@ -133,12 +152,12 @@ public class GameManager : MonoBehaviour
         wrong.enabled = false;
     }
 
-    private void pitchReset()
+    private void hitReset()
     {
         timer.enabled = false;
 
-        finger1.enabled = false;
-        finger3.enabled = false;        
+        pitcher1.enabled = false;
+        pitcher3.enabled = false;        
         //翻轉重置
         fingers.transform.localScale = new Vector3(1, 1, 1);
         bubble.SetActive(false);
@@ -148,8 +167,9 @@ public class GameManager : MonoBehaviour
     public void createBall()
     {
         ball = Instantiate(ball, Vector3.zero, Quaternion.identity);
+        // ball.transform.localScale = new Vector3(1, 1, 0); //變回原始大小
         ball.transform.SetParent(GameObject.FindGameObjectWithTag("baseball").transform, false);
-        ball.enabled = true;
+        ball.enabled = false;
     }
 
     IEnumerator playBall()
@@ -160,17 +180,26 @@ public class GameManager : MonoBehaviour
         point.enabled = false;
     }
 
-    IEnumerator strikeIns()
+    IEnumerator homerunPage()
     {
-        Instantiate(catchAudio, Vector2.zero, Quaternion.identity);    
-        strikeObj.SetActive(true);
-        Instantiate(strikeAudio, Vector2.zero, Quaternion.identity);
+        Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
+        hit.SetActive(true);
+        
         correctCount++;
         Image I = Instantiate(correctS, new Vector3(-288 + 64 * (ballCount - 1), -38, 0), Quaternion.identity) as Image;
         I.transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);
         answerS.Add(I);
-        yield return new WaitForSeconds(2);
-        strikeObj.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        hit.SetActive(false);
+        hrBall.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        hrBall.SetActive(false);
+        homerun.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        hrBoard.enabled = true;
+        yield return new WaitForSeconds(1f);
+        hrBoard.enabled = false;
+        homerun.SetActive(false);
         if (ballCount < totalBall)
         {
             createIns();
@@ -184,21 +213,17 @@ public class GameManager : MonoBehaviour
         }        
     }
 
-    IEnumerator homerunPage()
+    IEnumerator strikeout()
     {
-        Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
+        Instantiate(catchAudio, Vector2.zero, Quaternion.identity);
         Image I = Instantiate(wrongS, new Vector3(-288 + 65 * (ballCount - 1), -38, 0), Quaternion.identity) as Image;
         I.transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);
         answerS.Add(I);
         wrongCount++;
-        homerun.SetActive(true);
-        yield return new WaitForSeconds(1);
-        hrBoard.enabled = true;
+        Instantiate(strikeOutAudio, Vector2.zero, Quaternion.identity);
+        KBoard.SetActive(true);
         yield return new WaitForSeconds(1.5f);        
-        Instantiate(lostAudio, Vector2.zero, Quaternion.identity);
-        yield return new WaitForSeconds(1.5f);
-        hrBoard.enabled = false;
-        homerun.SetActive(false);
+        KBoard.SetActive(false);
         if (ballCount < totalBall)
         {
             createIns();
@@ -233,8 +258,9 @@ public class GameManager : MonoBehaviour
     public void createIns()
     {
         answerReset();
+        pitcherDefault.enabled = false;
         overPitch.enabled = false;
-        bubble.SetActive(true);
+        // bubble.SetActive(true);
         int isFlipped = 0;
         if (level == 3)
         {
@@ -264,21 +290,21 @@ public class GameManager : MonoBehaviour
         {
             if (isFlipped == 1)
             {
-                finger3.enabled = true;
+                pitcher3.enabled = true;
             } else
             {
-                finger1.enabled = true;
+                pitcher1.enabled = true;
             }            
         }
         if (instruction == 1)
         {
             if (isFlipped == 1)
             {
-                finger1.enabled = true;
+                pitcher1.enabled = true;
             }
             else
             {
-                finger3.enabled = true;
+                pitcher3.enabled = true;
             }
         }        
         StartCoroutine(playBall());
@@ -309,7 +335,7 @@ public class GameManager : MonoBehaviour
         {
             overPitch.enabled = true;           //時間結束時，畫面出現驚嘆號
             choose = 99;
-            pitchReset();
+            hitReset();
             compareAnswer();            
         }
         cd = 10;
