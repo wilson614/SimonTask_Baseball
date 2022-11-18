@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public GameObject hrBall;
     public Image correctS;
     public Image wrongS;
-    public GameObject fingers;
+    public GameObject pitchers;
     public List<Image> answerS;
     public Text statisticsText;
 
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
     private void answerReset()
     {
         correct.enabled = false;
-        wrong.enabled = false;
+        wrong.enabled = false;        
     }
 
     private void hitReset()
@@ -157,9 +157,8 @@ public class GameManager : MonoBehaviour
         timer.enabled = false;
 
         pitcher1.enabled = false;
-        pitcher3.enabled = false;        
-        //翻轉重置
-        fingers.transform.localScale = new Vector3(1, 1, 1);
+        pitcher3.enabled = false;
+        
         bubble.SetActive(false);
         canPitch = false;
     }
@@ -261,34 +260,35 @@ public class GameManager : MonoBehaviour
         pitcherDefault.enabled = false;
         overPitch.enabled = false;
         // bubble.SetActive(true);
+
+        //翻轉重置
+        pitchers.transform.localScale = new Vector3(1, 1, 1);
+
         int isFlipped = 0;
+        int isHigh = 0;
         if (level == 3)
         {
             //(0: 不翻轉, 1: 翻轉)
             isFlipped = Random.Range(0, 2);            
             if (isFlipped == 1)
             {
-                fingers.transform.localScale = new Vector3(1, -1, 1);
+                pitchers.transform.localScale = new Vector3(1, -1, 1);
             }
         }
         if (level >= 2)
         {
-            //(0: 左45度, 1: 右45度)
-            int angle = Random.Range(0, 2);
-            if (angle == 0)
+            //(0: 不翻轉, 1: 翻轉)
+            isFlipped = Random.Range(0, 2);
+            if (isFlipped == 1)
             {
-                fingers.transform.localEulerAngles = new Vector3(0, 0, -45);
-            }
-            if (angle == 1)
-            {
-                fingers.transform.localEulerAngles = new Vector3(0, 0, 45);
+                pitchers.transform.localScale = new Vector3(-1, 1, 1);
             }
         }
         //(0: 投左, 1: 投右)
         instruction = Random.Range(0, 2);
         if (instruction == 0)
         {
-            if (isFlipped == 1)
+            if (isHigh == 1)
             {
                 pitcher3.enabled = true;
             } else
@@ -298,7 +298,7 @@ public class GameManager : MonoBehaviour
         }
         if (instruction == 1)
         {
-            if (isFlipped == 1)
+            if (isHigh == 1)
             {
                 pitcher1.enabled = true;
             }

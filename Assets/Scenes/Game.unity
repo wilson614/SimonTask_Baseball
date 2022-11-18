@@ -174,9 +174,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50.4, y: 139.9}
+  m_AnchoredPosition: {x: 90.399994, y: 139.9}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.9, y: 0.5}
 --- !u!1 &67453414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,7 +1622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.8, y: 258}
+  m_AnchoredPosition: {x: 2.800003, y: 258}
   m_SizeDelta: {x: 167.52582, y: 310.7334}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &563027076
@@ -2987,7 +2987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.8, y: 258}
+  m_AnchoredPosition: {x: 2.800003, y: 258}
   m_SizeDelta: {x: 167.52582, y: 310.7334}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1392220396
@@ -4772,7 +4772,7 @@ MonoBehaviour:
   correctS: {fileID: 2860962761323157107, guid: 6bf754dbd5640f54080de32a24130459,
     type: 3}
   wrongS: {fileID: 7351931826849357957, guid: 6a344f6f4248b4349a148f2b545baacd, type: 3}
-  fingers: {fileID: 56619921}
+  pitchers: {fileID: 56619921}
   answerS: []
   statisticsText: {fileID: 289974530}
   cd: 10
