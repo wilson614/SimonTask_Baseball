@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public Image wrong;
     public Image pitcher1;
     public Image pitcher3;
+    public Image pitcher1H;
+    public Image pitcher3H;
     public Image pitcherDefault;
     public GameObject bubble;
     public Image point;
@@ -158,7 +160,9 @@ public class GameManager : MonoBehaviour
 
         pitcher1.enabled = false;
         pitcher3.enabled = false;
-        
+        pitcher1H.enabled = false;
+        pitcher3H.enabled = false;
+
         bubble.SetActive(false);
         canPitch = false;
     }
@@ -268,12 +272,9 @@ public class GameManager : MonoBehaviour
         int isHigh = 0;
         if (level == 3)
         {
-            //(0: 不翻轉, 1: 翻轉)
-            isFlipped = Random.Range(0, 2);            
-            if (isFlipped == 1)
-            {
-                pitchers.transform.localScale = new Vector3(1, -1, 1);
-            }
+            //(0: 原始, 1: 高抬腿)
+            isHigh = Random.Range(0, 2);            
+            
         }
         if (level >= 2)
         {
@@ -290,7 +291,7 @@ public class GameManager : MonoBehaviour
         {
             if (isHigh == 1)
             {
-                pitcher3.enabled = true;
+                pitcher3H.enabled = true;
             } else
             {
                 pitcher1.enabled = true;
@@ -300,7 +301,7 @@ public class GameManager : MonoBehaviour
         {
             if (isHigh == 1)
             {
-                pitcher1.enabled = true;
+                pitcher1H.enabled = true;
             }
             else
             {
