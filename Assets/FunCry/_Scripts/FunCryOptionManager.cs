@@ -36,7 +36,7 @@ public class FunCryOptionManager : MonoBehaviour
     [Header("選項狀態")]
     public bool ok;
     public bool isCheck;
-    GameManager g;
+    [SerializeField] GameManager g;
 
     private RuleManager ruleManager;
 
@@ -60,7 +60,6 @@ public class FunCryOptionManager : MonoBehaviour
             ruleManager = GetComponent<RuleManager>();
         if (optionType == OptionType.Game)
             GetComponent<CanvasGroup>().alpha = 0;
-        g = FindObjectOfType<GameManager>();
     }
 
     private void Start()
@@ -108,6 +107,8 @@ public class FunCryOptionManager : MonoBehaviour
         }
         if (ok)
         {
+            if (GetComponent<CanvasGroup>().alpha == 0)
+                return;
             sliders[index].value += 2f * Time.deltaTime;
             if (sliders[index].value == sliders[index].maxValue)
             {
