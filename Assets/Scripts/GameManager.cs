@@ -23,8 +23,10 @@ public class GameManager : MonoBehaviour
     public Image point;
     public GameObject strikeObj;
     public GameObject homerun;
+    public GameObject homerunL;
     public GameObject hit;
     public GameObject hrBall;
+    public GameObject hrBallL;
     public Image correctS;
     public Image wrongS;
     public GameObject pitchers;
@@ -186,23 +188,36 @@ public class GameManager : MonoBehaviour
     IEnumerator homerunPage()
     {
         Instantiate(hitAudio, Vector2.zero, Quaternion.identity);
-        hit.SetActive(true);
-        
         correctCount++;
         Image I = Instantiate(correctS, new Vector3(-288 + 64 * (ballCount - 1), -38, 0), Quaternion.identity) as Image;
         I.transform.SetParent(GameObject.FindGameObjectWithTag("countBoard").transform, false);
         answerS.Add(I);
-        yield return new WaitForSeconds(0.5f);
-        hit.SetActive(false);
-        hrBall.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        hrBall.SetActive(false);
-        homerun.SetActive(true);
+
+        hit.SetActive(true);
+        if (choose == 0)
+        {
+            yield return new WaitForSeconds(0.5f);            
+            hit.SetActive(false);
+            hrBallL.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            hrBallL.SetActive(false);
+            homerunL.SetActive(true);
+        } else
+        {            
+            yield return new WaitForSeconds(0.5f);
+            hit.SetActive(false);
+            hrBall.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            hrBall.SetActive(false);
+            homerun.SetActive(true);
+        }
         yield return new WaitForSeconds(1f);
         hrBoard.enabled = true;
         yield return new WaitForSeconds(1f);
         hrBoard.enabled = false;
         homerun.SetActive(false);
+        homerunL.SetActive(false);
+
         if (ballCount < totalBall)
         {
             createIns();
