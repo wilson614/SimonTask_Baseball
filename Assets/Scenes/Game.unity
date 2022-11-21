@@ -2058,6 +2058,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6043831211516475337, guid: 64c3c91db6872904496ce250a5a78f27,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6043831211818990869, guid: 64c3c91db6872904496ce250a5a78f27,
         type: 3}
       propertyPath: hand
@@ -4908,19 +4913,19 @@ PrefabInstance:
         type: 3}
       propertyPath: rules.Array.data[0]
       value: 
-      objectReference: {fileID: 21300000, guid: 66d522bdcce249d4886f3be8fd11cccf,
+      objectReference: {fileID: 21300000, guid: 6d8dd4ba120ed2445a7be7af7ca6f607,
         type: 3}
     - target: {fileID: 1982552710430197906, guid: 4d0e1771b80081e44a9a0bb0297ed822,
         type: 3}
       propertyPath: rules.Array.data[1]
       value: 
-      objectReference: {fileID: 21300000, guid: b1c4101fa4101cf40adedf19ea5cd7ac,
+      objectReference: {fileID: 21300000, guid: 598c9b3a8442d2d43b13f8e0a8bb010e,
         type: 3}
     - target: {fileID: 1982552710430197906, guid: 4d0e1771b80081e44a9a0bb0297ed822,
         type: 3}
       propertyPath: rules.Array.data[2]
       value: 
-      objectReference: {fileID: 21300000, guid: c6cdcdf110200234091bb2d095e436d2,
+      objectReference: {fileID: 21300000, guid: f4359f1388f8f83409eb085e95f08a9a,
         type: 3}
     - target: {fileID: 5774816207955111776, guid: 4d0e1771b80081e44a9a0bb0297ed822,
         type: 3}
